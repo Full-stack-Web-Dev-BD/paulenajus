@@ -108,8 +108,6 @@ export default function Charging() {
             <CardActions>
               <Link to='/cconnect'>
                 <Button size="small" variant="contained" color="secondary" onClick={() => { connectCharger() }} >Stop Charging  </Button>
-                {/* <Button size="small" variant="contained" color="primery"  onClick={()=>{connectCharger()}} >Puse </Button>
-                <Button size="small" variant="contained" color="danger"  onClick={()=>{connectCharger()}} >Recunnect </Button> */}
               </Link>
             </CardActions>
           </Card>
