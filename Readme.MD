@@ -15,8 +15,6 @@
     )>The actual payment of the charges is not covered by this application
 
 
-
-
 Charger Property
     model/name
     type

@@ -13,16 +13,20 @@ import Login from './Component/PublicComponent/Login'
 import Register from './Component/PublicComponent/Register'
 import Mail from './Component/ProtectedComponent/Mail'
 import EditSchedule from './Component/ProtectedComponent/EditSchedule';
-
+import SinglaChargerPage from './Component/SinglaChargerPage';
+import ChargerConnectPage from './Component/ChargerConnectPage'
+import Charging from './Component/Charging';
 class App extends Component {
     render() { 
         return (
             <BrowserRouter>
                 <Switch>
                     <ProtectedRoute path="/home" component={Home} />
-                    <ProtectedRoute path="/create-schedule" component={CreateSchedule} />
-                    <ProtectedRoute path="/send-email" component={Mail} />
-                    <ProtectedRoute path="/edit-schedule" component={EditSchedule} schedule />
+                    <ProtectedRoute path="/cdetails" component={SinglaChargerPage} />
+                    <ProtectedRoute path="/cconnect" component={ChargerConnectPage} />
+                    <ProtectedRoute path="/charging" component={Charging} />
+                    {/* <ProtectedRoute path="/create-schedule" component={CreateSchedule} /> */}
+                    {/* <ProtectedRoute path="/send-email" component={Mail} /> */}
 
 
 

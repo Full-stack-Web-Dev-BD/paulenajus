@@ -84,12 +84,12 @@ export default function MenuListComposition() {
                     <MenuItem onClick={handleClose}>
                         <Link to='/home'>Home</Link>
                     </MenuItem>
-                    <MenuItem onClick={handleClose}>
+                    {/* <MenuItem onClick={handleClose}>
                       <Link to='/send-email'>Send Email</Link>
                     </MenuItem>
                     <MenuItem onClick={handleClose}>
                       <Link to='/create-post'>Create Schedule</Link>
-                    </MenuItem>
+                    </MenuItem> */}
                     <MenuItem onClick={handleClose}>
                       <Button onClick={()=>logout()} variant="contained" color="danger" className="mt-5 mb-3">Log Out</Button>
                     </MenuItem>

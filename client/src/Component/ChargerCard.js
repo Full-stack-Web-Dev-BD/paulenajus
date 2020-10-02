@@ -5,6 +5,7 @@ import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
+import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles({
   root: {
@@ -23,7 +24,7 @@ const useStyles = makeStyles({
   },
 });
 
-export default function OutlinedCard() {
+export default function ChargerCard() {
   const classes = useStyles();
   const bull = <span className={classes.bullet}>•</span>;
 
@@ -31,22 +32,30 @@ export default function OutlinedCard() {
     <Card className={classes.root} variant="outlined">
       <CardContent>
         <Typography className={classes.title} color="textSecondary" gutterBottom>
-          Word of the Day
+          Model : 28392
         </Typography>
         <Typography variant="h5" component="h2">
-          be{bull}nev{bull}o{bull}lent
+          Type:ABCD
         </Typography>
         <Typography className={classes.pos} color="textSecondary">
-          adjective
+          Status : Avilable
+        </Typography>
+
+        <Typography className={classes.pos} color="textSecondary">
+          Location : Bangladesh
         </Typography>
         <Typography variant="body2" component="p">
-          well meaning and kindly.
+          Description:
           <br />
-          {'"a benevolent smile"'}
+          <p>
+            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Vitae, ullam corrupti assumenda quos natus harum unde nesciunt tenetur molestias.
+          </p>
         </Typography>
       </CardContent>
       <CardActions>
-        <Button size="small">Learn More</Button>
+        <Link to='/cdetails'>
+          <Button variant="contained" color="primery" size="small">Learn More</Button>
+        </Link>
       </CardActions>
     </Card>
   );

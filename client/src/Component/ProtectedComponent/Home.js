@@ -8,7 +8,7 @@ import Typography from '@material-ui/core/Typography';
 import Navbar from './Navbar'
 import Axios from 'axios'
 import { Link } from 'react-router-dom';
-
+import ChargerCard from '../ChargerCard'
 
 
 const useStyles = makeStyles({
@@ -140,36 +140,13 @@ export default function Home() {
     <>
       <Navbar title=" Dashboard " />
       <div className="container">
-        <div className="row">
+        <div className="row mt-5">
           {
-            allSchedule.map(single => {
+            data.map(single => {
               return (
-                <Card className={classes.root} variant="outlined">
-                  <CardContent>
-                    <Typography className={classes.title} color="textSecondary" gutterBottom>
-                      {single.title}
-                    </Typography>
-                    <Typography variant="h5" component="h2">
-                      {single.teacher}
-                    </Typography>
-                    <Typography variant="p" component="p">
-                      <p>ClassRoom :{single.classroom}</p>
-                    </Typography>
-                    <Typography className={classes.pos} color="textSecondary">
-                      <strong>Event Time: </strong>{single.time.split('T')[0] + ' at ' + single.time.split('T')[1]}
-                    </Typography>
-                    <Typography variant="body2" component="p">
-                      <br />
-                      <p><strong>Post At :</strong> {single.createAt}</p>
-                    </Typography>
-                  </CardContent>
-                  <CardActions>
-                    <div style={{ alignItems: "center" }}>
-                      <Button size="small" variant="contained" color="success" className="mt-5 mb-3 ml-2"><Link to={`/edit-schedule?id=${single._id}`}>Edit</Link></Button>
-                      <Button size="small" variant="contained" color="secondary" className="mt-5 mb-3 ml-2">Delete</Button>
-                    </div>
-                  </CardActions>
-                </Card>
+                <div className="col-md-4 mb-4">
+                  <ChargerCard/>
+                </div>
               )
             })
           }
