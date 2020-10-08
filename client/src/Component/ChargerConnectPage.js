@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
@@ -7,13 +7,18 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import Navbar from './ProtectedComponent/Navbar'
 import PowerIcon from '@material-ui/icons/Power';
-import { Link } from 'react-router-dom';
-import { Input } from '@material-ui/core';
-import { set } from 'mongoose';
+import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
+import IndeterminateCheckBoxOutlinedIcon from '@material-ui/icons/IndeterminateCheckBoxOutlined';
+import Alert from '@material-ui/lab/Alert';
+import queryString from 'query-string'
+import Axios from 'axios';
+
+
 const useStyles = makeStyles({
   root: {
     minWidth: 275,
-    padding: '40px'
+    padding: '40px',
+    textAlign: 'center'
   },
   bullet: {
     display: 'inline-block',
@@ -29,45 +34,82 @@ const useStyles = makeStyles({
 });
 
 export default function ChargerConnectPage() {
-  const [btnString, setBtnString] = useState('Connect')
-  const [chargerDigit, setChargerDigit] = useState('')
+  const [btnString, setBtnString] = useState('Continue with')
+  const [chargingTime, setChargingTime] = useState(0)
   const [error, setError] = useState(false)
   const classes = useStyles();
+  const [chargerInformation, setChargerInformation] = useState({})
+  const [qs, setQs] = useState({})
   
-  const bull = <span className={classes.bullet}>•</span>;
-  const connectCharger=()=>{
-    if(!chargerDigit){
+
+  useEffect(()=>{
+    console.log(queryString.parse(window.location.search))
+    let obj={
+      clid:queryString.parse(window.location.search).clid,
+      cpid:queryString.parse(window.location.search).cpid
+    }
+    Axios.post('/findchargepoint',obj)
+    .then(res=>{
+      console.log(res.data)
+      setChargerInformation(res.data.chargePoint)
+    })
+    .catch(err=>{
+      console.log(err.response)
+    })
+  },[])
+  const connectCharger = () => {
+    if (chargingTime < 1) {
       return setError(true)
     }
+    let sure=window.confirm(`Are you sure to continue for ${chargingTime} Hours with ${chargingTime*chargerInformation.cost}$  ? ` )
+    return
+    setError(false)
     setBtnString('Connecting ...')
     setTimeout(() => {
-      window.location.href='/charging'
+      window.location.href = '/charging'
     }, 2000);
   }
   return (
     <div>
       <Navbar title=" Dashboard " />
-
       <div className="row mt-5">
         <div className="col-md-6 offset-md-3">
+          {
+            error ?
+              <div className="mb-3">
+                <Alert variant="filled" severity="error">
+                  Charging time can't be 0
+                </Alert>
+              </div> : ''
+          }
           <Card className={classes.root} variant="outlined" >
-            
-        <div className="col-md-4 offset-md-4">
-        </div>
-            <div className="text-center">
-              <img  src={require('../Component/images/charging.gif')}/>
+
+            <div className="col-md-4 offset-md-4">
+            </div>
+            <div className="text-center mb-4">
+              <img src={require('../Component/images/charging.gif')} />
             </div>
             <Typography variant="h5" color="primary" component="h2">
-              <PowerIcon  color="primery" />Connect Your Charger
+              <PowerIcon color="primery" />Connect Your Charger
             </Typography>
             <CardContent>
-              <Typography className={classes.title} color="textSecondary" gutterBottom>
-                <Input error={error} fullWidth={true} type="text" onChange={(e)=>{setChargerDigit(e.target.value)}} placeholder="Enter 4 digit code of your choosen charger " />
-              </Typography>
+              <div>
+
+                <p style={{ color: '#f50057', fontWeight: '600' }}>
+                  Selected time:  <span style={{color:'#FF8B00',fontWeight:'700'}}> {chargingTime} </span> and estimate cost : <span style={{color:'#FF8B00',fontWeight:'700'}}> {chargingTime * chargerInformation.cost}$ </span>
+                </p>
+              </div>
+              <div className="d-inline-block mb-3">
+                <div className="d-flex">
+                  <Button variant="contained" onClick={() => { setChargingTime(chargingTime + 1) }} color="secondary"><IndeterminateCheckBoxOutlinedIcon /></Button>
+                  <Button variant="outlined" color="secondary" style={{ margin: '0 10px' }}> <b style={{ fontSize: '30px !importent' }}>{chargingTime}</b></Button>
+                  <Button variant="contained" color="secondary" onClick={() => { setChargingTime(chargingTime + 1) }}><AddCircleOutlineIcon /></Button>
+                </div>
+              </div>
+              <div className="clearfix"></div>
+              <Button size="small" variant="contained" color="secondary" onClick={() => { connectCharger() }} >{btnString+' '+ chargingTime*chargerInformation.cost+'$'} </Button>
+
             </CardContent>
-            <CardActions>
-                <Button size="small" variant="contained" color="secondary"  onClick={()=>{connectCharger()}} >Connect </Button>
-            </CardActions>
           </Card>
         </div>
       </div>

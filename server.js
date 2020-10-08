@@ -6,9 +6,7 @@ const bodyParser=require('body-parser')
 const cors =require('cors')
 const multer=require('multer')
 const mailer=require('./mailer')
-
 const userRouter=require('./router/userRouter')
-const scheduleRouter =require('./router/scheduleRouter')
 
 
 const storage = multer.diskStorage({
@@ -29,15 +27,13 @@ app.use(cors())
 app.use(bodyParser.urlencoded({extended:true}))
 app.use(bodyParser.json())
 app.use(userRouter)
-app.use(scheduleRouter)
+app.use(require('./router/chargerRouter'))
+
 
 
 
 
 app.post('/send-email' ,upload.single('file'), (req, res)=>{
-    // console.log(req.body.to)
-    // console.log(req.file)
-    // console.log(req.body.to.split(','))
     mailer(
         req.body.from,
         req.body.to.split(','),

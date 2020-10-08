@@ -40,24 +40,42 @@ const loginValidator=(req)=>{
         err:err
     }
 }
-const scheduleValidator=(req)=>{
+const chargeLocationValidator=(req)=>{
     let err={}
-    if(!req.body.time){
-        err.time="Time Required !"
+    if(!req.body.status){
+        err.status="Status Required !"
     }
-    if(!req.body.title){
-        err.title="Title Required !"
+    if(!req.body.chargeLocationtName){
+        err.chargeLocationtName="Charge Point Name Required !"
     }
-    if(!req.body.teacher){
-        err.teacher="Teacher Required !"
+    return{
+        isValid:Object.keys(err).length===0,
+        err:err
     }
-    if(!req.body.classroom){
-        err.classroom="ClassRoom Required !"
+}
+
+const chargePointValidator=(req)=>{
+    console.log(req.body)
+    let err={}
+    if(!req.body.cpname){
+        err.cpname="Charger Point  Name  Required !"
     }
-    if(!req.body.schoolsubject){
-        err.schoolsubject="Scheool Subject Required !"
+    if(!req.body.status){
+        err.status="Status Required !"
     }
-    
+    if(!req.body.kw){
+        err.kw="Charger KW Required !"
+    }
+    if(!req.body.type){
+        err.type="Type Required !"
+    }
+    if(!req.body.cost){
+        err.cost="Cost Required !"
+    }
+    if(!req.body.clid){
+        err.clid="Charge location id required !"
+    }
+    console.log(err)
     return{
         isValid:Object.keys(err).length===0,
         err:err
@@ -66,5 +84,6 @@ const scheduleValidator=(req)=>{
 module.exports={
     loginValidator,
     registerValidator,
-    scheduleValidator
+    chargeLocationValidator,
+    chargePointValidator
 }

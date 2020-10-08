@@ -25,6 +25,7 @@ const register=(req,res)=>{
                 name:req.body.name,
                 email:req.body.email,
                 password:hash,
+                type:'user'
             }).save()
             .then(user=>{
                 console.log(user)
@@ -61,7 +62,8 @@ const login=(req,res)=>{
             let token=jwt.sign({
                 type:user.type,
                 name:user.name,
-                email:user.email
+                email:user.email,
+                type:user.type
             },'st_app',{expiresIn:'4h'})
             
             return res.status(200).json({token:token})

@@ -7,7 +7,7 @@ const ProtectedRoute=({component:Component,...rest})=> {
             {...rest}
             render={
                 props=>{
-                    if(localStorage.getItem('st_app')){
+                    if(localStorage.getItem('car-app')){
                         return <Component {...props}/>
                     }else{
                         return(

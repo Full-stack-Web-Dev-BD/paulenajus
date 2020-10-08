@@ -3,7 +3,7 @@ import Navbar from './Navbar'
 import { Card, CardContent,TextField,CardHeader, CardActionArea } from '@material-ui/core'
 import Button from '@material-ui/core/Button';
 import Axios from 'axios'
-
+import jwtDecode from 'jwt-decode'
 import {Link} from 'react-router-dom'
 
 const Login = () => {
@@ -17,10 +17,17 @@ const Login = () => {
         let obj={email,password}
         Axios.post('/login',obj)
         .then(res=>{
-            console.log(res.data)
-            window.localStorage.setItem('st_app',res.data.token)
-            window.location.href='/home'
-
+            let decodedToken=jwtDecode(res.data.token)
+            console.log(decodedToken)
+            // window.localStorage.setItem('car-app',res.data.token)
+            // window.location.href='/home'
+            if(decodedToken.type==='user'){
+                window.localStorage.setItem('car-app',res.data.token)
+                window.location.href='/home'
+            }else if(decodedToken.type==='admin'){
+                window.localStorage.setItem('car-app',res.data.token)
+                window.location.href='/admin'
+            }
         })
         .catch(err=>{
             console.log(err.response.data)

@@ -1,21 +1,21 @@
 Arguments: 
-  C:\Program Files\nodejs\node.exe C:\Program Files (x86)\Yarn\bin\yarn.js add react-calendar-timeline
+  C:\Program Files (x86)\nodejs\node.exe C:\Users\User\AppData\Roaming\npm\node_modules\yarn\bin\yarn.js add recoil
 
 PATH: 
-  C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files\nodejs\;C:\Program Files (x86)\Yarn\bin\;C:\Program Files\Git\cmd;C:\Users\Alamin\AppData\Local\Android\Sdk\platform-tools;C:\Program Files\MySQL\MySQL Shell 8.0\bin\;C:\Users\Alamin\AppData\Local\Microsoft\WindowsApps;C:\Users\Alamin\AppData\Roaming\npm;C:\Users\Alamin\AppData\Local\Yarn\bin;C:\Program Files\MongoDB\Server\4.2\bin;C:\Users\Alamin\AppData\Local\Programs\Microsoft VS Code\bin;C:\Program Files\heroku\bin;C:\Program Files\Java\jdk-13.0.2\bin;C:\Users\Alamin\AppData\Local\Android\Sdk\tools;C:\Users\Alamin\AppData\Local\Android\Sdk\platform-tools;C:\Users\Alamin\AppData\Local\GitHubDesktop\bin;C:\Program Files\flutter\bin;
+  C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files (x86)\nodejs\;C:\Program Files\Git\cmd;C:\Users\User\AppData\Local\Programs\Python\Python38-32\Scripts\;C:\Users\User\AppData\Local\Programs\Python\Python38-32\;C:\Users\User\AppData\Local\Microsoft\WindowsApps;C:\Users\User\AppData\Local\Programs\Microsoft VS Code\bin;C:\Program Files\MongoDB\Server\4.4\bin;C:\Users\User\AppData\Roaming\npm;C:\Users\User\.virtualenvs\User-jBUq-HwN\Scripts;C:\Users\User\AppData\Local\Programs\Python\Python38-32\Scripts;C:\Program Files\MinGW\bin;
 
 Yarn version: 
-  1.19.2
+  1.22.5
 
 Node version: 
-  12.14.1
+  12.18.3
 
 Platform: 
-  win32 x64
+  win32 ia32
 
 Trace: 
   Error: getaddrinfo ENOTFOUND registry.yarnpkg.com
-      at GetAddrInfoReqWrap.onlookup [as oncomplete] (dns.js:60:26)
+      at GetAddrInfoReqWrap.onlookup [as oncomplete] (dns.js:66:26)
 
 npm manifest: 
   {
@@ -30,11 +30,15 @@ npm manifest:
       "@testing-library/react": "^9.3.2",
       "@testing-library/user-event": "^7.1.2",
       "axios": "^0.19.2",
+      "email-validator": "^2.0.4",
+      "install": "^0.13.0",
+      "interactjs": "^1.9.19",
       "jwt-decode": "^2.2.0",
       "moment": "^2.27.0",
       "query-string": "^6.13.1",
       "react": "^16.13.1",
       "react-big-calendar": "^0.26.0",
+      "react-calendar-timeline": "^0.27.0",
       "react-dom": "^16.13.1",
       "react-router-dom": "^5.2.0",
       "react-scripts": "3.4.1"
@@ -1812,6 +1816,11 @@ Lockfile:
     dependencies:
       "@hapi/hoek" "^8.3.0"
   
+  "@interactjs/types@1.9.19":
+    version "1.9.19"
+    resolved "https://registry.yarnpkg.com/@interactjs/types/-/types-1.9.19.tgz#f096eb395ca190995c083497c755b65be0a88677"
+    integrity sha512-PcaY5MmQTH5eiI525d57eB+/OH6V7utU5FfkbjfvYdFV2dE8NXjYlKiXOy7G0/Y08PyXPhge60TFaYOMYqmIUQ==
+  
   "@jest/console@^24.7.1", "@jest/console@^24.9.0":
     version "24.9.0"
     resolved "https://registry.yarnpkg.com/@jest/console/-/console-24.9.0.tgz#79b1bc06fb74a8cfb01cbdedf945584b1b9707f0"
@@ -3218,6 +3227,11 @@ Lockfile:
       mixin-deep "^1.2.0"
       pascalcase "^0.1.1"
   
+  batch-processor@1.0.0:
+    version "1.0.0"
+    resolved "https://registry.yarnpkg.com/batch-processor/-/batch-processor-1.0.0.tgz#75c95c32b748e0850d10c2b168f6bdbe9891ace8"
+    integrity sha1-dclcMrdI4IUNEMKxaPa9vpiRrOg=
+  
   batch@0.6.1:
     version "0.6.1"
     resolved "https://registry.yarnpkg.com/batch/-/batch-0.6.1.tgz#dc34314f4e679318093fc760272525f94bf25c16"
@@ -3716,6 +3730,11 @@ Lockfile:
       isobject "^3.0.0"
       static-extend "^0.1.1"
   
+  classnames@^2.2.6:
+    version "2.2.6"
+    resolved "https://registry.yarnpkg.com/classnames/-/classnames-2.2.6.tgz#43935bffdd291f326dad0a205309b38d00f650ce"
+    integrity sha512-JR/iSQOSt+LQIWwrwEzJ9uk0xfN3mTVYMwt1Ir5mUcSN6pU+V4zQFFaJsclJbPuAUQH+yfWef6tm7l1quW3C8Q==
+  
   clean-css@^4.2.3:
     version "4.2.3"
     resolved "https://registry.yarnpkg.com/clean-css/-/clean-css-4.2.3.tgz#507b5de7d97b48ee53d84adb0160ff6216380f78"
@@ -4092,6 +4111,14 @@ Lockfile:
       ripemd160 "^2.0.0"
       safe-buffer "^5.0.1"
       sha.js "^2.4.8"
+  
+  create-react-context@^0.3.0:
+    version "0.3.0"
+    resolved "https://registry.yarnpkg.com/create-react-context/-/create-react-context-0.3.0.tgz#546dede9dc422def0d3fc2fe03afe0bc0f4f7d8c"
+    integrity sha512-dNldIoSuNSvlTJ7slIKC/ZFGKexBMBrrcc+TTe1NdmROnaASuLPvqpwj9v4XS4uXZ8+YPu0sNmShX2rXI5LNsw==
+    dependencies:
+      gud "^1.0.0"
+      warning "^4.0.3"
   
   cross-spawn@7.0.1:
     version "7.0.1"
@@ -4761,6 +4788,13 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.3.480.tgz#190ae45074578349a4c4f336fba29e76b20e9ef5"
     integrity sha512-wnuUfQCBMAdzu5Xe+F4FjaRK+6ToG6WvwG72s8k/3E6b+hoGVYGiQE7JD1NhiCMcqF3+wV+c2vAnaLGRSSWVqA==
   
+  element-resize-detector@^1.1.12:
+    version "1.2.1"
+    resolved "https://registry.yarnpkg.com/element-resize-detector/-/element-resize-detector-1.2.1.tgz#b0305194447a4863155e58f13323a0aef30851d1"
+    integrity sha512-BdFsPepnQr9fznNPF9nF4vQ457U/ZJXQDSNF1zBe7yaga8v9AdZf3/NElYxFdUh7SitSGt040QygiTo6dtatIw==
+    dependencies:
+      batch-processor "1.0.0"
+  
   elliptic@^6.0.0:
     version "6.5.2"
     resolved "https://registry.yarnpkg.com/elliptic/-/elliptic-6.5.2.tgz#05c5678d7173c049d8ca433552224a495d0e3762"
@@ -4773,6 +4807,11 @@ Lockfile:
       inherits "^2.0.1"
       minimalistic-assert "^1.0.0"
       minimalistic-crypto-utils "^1.0.0"
+  
+  email-validator@^2.0.4:
+    version "2.0.4"
+    resolved "https://registry.yarnpkg.com/email-validator/-/email-validator-2.0.4.tgz#b8dfaa5d0dae28f1b03c95881d904d4e40bfe7ed"
+    integrity sha512-gYCwo7kh5S3IDyZPLZf6hSS0MnZT8QmJFqYvbqlDZSbwdZlY6QZWxJ4i/6UhITOJ4XzyI647Bm2MXKCLqnJ4nQ==
   
   emoji-regex@^7.0.1, emoji-regex@^7.0.2:
     version "7.0.3"
@@ -5847,6 +5886,11 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/growly/-/growly-1.3.0.tgz#f10748cbe76af964b7c96c93c6bcc28af120c081"
     integrity sha1-8QdIy+dq+WS3yWyTxrzCivEgwIE=
   
+  gud@^1.0.0:
+    version "1.0.0"
+    resolved "https://registry.yarnpkg.com/gud/-/gud-1.0.0.tgz#a489581b17e6a70beca9abe3ae57de7a499852c0"
+    integrity sha512-zGEOVKFM5sVPPrYs7J5/hYEw2Pof8KCyOwyhG8sAF26mCAeUFAcYPu1mwB7hhpIP29zOIBaDqwuHdLp0jvZXjw==
+  
   gzip-size@5.1.1:
     version "5.1.1"
     resolved "https://registry.yarnpkg.com/gzip-size/-/gzip-size-5.1.1.tgz#cb9bee692f87c0612b232840a873904e4c135274"
@@ -6343,6 +6387,18 @@ Lockfile:
       string-width "^4.1.0"
       strip-ansi "^5.1.0"
       through "^2.3.6"
+  
+  install@^0.13.0:
+    version "0.13.0"
+    resolved "https://registry.yarnpkg.com/install/-/install-0.13.0.tgz#6af6e9da9dd0987de2ab420f78e60d9c17260776"
+    integrity sha512-zDml/jzr2PKU9I8J/xyZBQn8rPCAY//UOYNmR01XwNwyfhEWObo2SWfSl1+0tm1u6PhxLwDnfsT/6jB7OUxqFA==
+  
+  interactjs@^1.9.19:
+    version "1.9.19"
+    resolved "https://registry.yarnpkg.com/interactjs/-/interactjs-1.9.19.tgz#f3fabdeefb078eb6db4bbc7dcb405c90c2ad2b41"
+    integrity sha512-ChmOCu0MMUuwvag/WpmgH3sGTDZ5WwnUCPSXwc+gFKyTNVUs5HsSj+WBj0/hdA7cBwscMe24vergPcwrs8vLmQ==
+    dependencies:
+      "@interactjs/types" "1.9.19"
   
   internal-ip@^4.3.0:
     version "4.3.0"
@@ -7629,6 +7685,11 @@ Lockfile:
     version "3.0.0"
     resolved "https://registry.yarnpkg.com/lodash._reinterpolate/-/lodash._reinterpolate-3.0.0.tgz#0ccf2d89166af03b3663c796538b75ac6e114d9d"
     integrity sha1-DM8tiRZq8Ds2Y8eWU4t1rG4RTZ0=
+  
+  lodash.isequal@^4.5.0:
+    version "4.5.0"
+    resolved "https://registry.yarnpkg.com/lodash.isequal/-/lodash.isequal-4.5.0.tgz#415c4478f2bcc30120c22ce10ed3226f7d3e18e0"
+    integrity sha1-QVxEePK8wwEgwizhDtMib30+GOA=
   
   lodash.memoize@^4.1.2:
     version "4.1.2"
@@ -9914,6 +9975,17 @@ Lockfile:
       prop-types "^15.7.2"
       react-overlays "^2.0.0-0"
       uncontrollable "^7.0.0"
+  
+  react-calendar-timeline@^0.27.0:
+    version "0.27.0"
+    resolved "https://registry.yarnpkg.com/react-calendar-timeline/-/react-calendar-timeline-0.27.0.tgz#25305cd2342db413c53ca4e94805c0df57d940ee"
+    integrity sha512-LOC7yrLT5bkfZAhfUKDhDkxyYd14dMnb3jXJzkpOyciPJyUwYWhxCDhjxwddfXjcB317NJVpszcqpk7xJw0mQg==
+    dependencies:
+      classnames "^2.2.6"
+      create-react-context "^0.3.0"
+      element-resize-detector "^1.1.12"
+      lodash.isequal "^4.5.0"
+      memoize-one "^5.1.1"
   
   react-dev-utils@^10.2.1:
     version "10.2.1"

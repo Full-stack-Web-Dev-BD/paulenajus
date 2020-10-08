@@ -6,7 +6,7 @@ import Navbar from './Navbar'
 import {useRecoilState} from 'recoil'
 import {searchLocationState} from '../../recoilState'
 
-const Home = () => {
+const PublicPage = () => {
   const [getSearchLocationState,setSearchLocationState] =useRecoilState(searchLocationState)
   useEffect(() => {
     Axios.get('/getalllocation')
@@ -56,4 +56,4 @@ const Home = () => {
   )
 }
 
-export default Home
+export default PublicPage
