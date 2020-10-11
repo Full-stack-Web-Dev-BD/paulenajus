@@ -300,7 +300,7 @@ export default function Navbar({ title }) {
                 </IconButton>
                 <IconButton aria-label="show 17 new notifications" color="inherit">
                   <Badge color="primary">
-                    <Link to='/signup' >
+                    <Link to='/register' >
                       <Button variant="contained" color="primary">
                         SIGN UP
                     </Button>

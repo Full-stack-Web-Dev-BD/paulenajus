@@ -7,7 +7,7 @@ const cors =require('cors')
 const multer=require('multer')
 const mailer=require('./mailer')
 const userRouter=require('./router/userRouter')
-
+const path=require('path')
 
 const storage = multer.diskStorage({
     destination:function(req, file , cb){
@@ -43,9 +43,21 @@ app.post('/send-email' ,upload.single('file'), (req, res)=>{
         res
     )
 })
+
+
+// If no API routes are hit, send the build version of the React client
+app.use(express.static(path.join(__dirname, './client/build')));
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, './client/build/index.html'));
+});
+
+app.use(express.static(path.join(__dirname,'./client/build')))
+app.get('*',(req,res)=>{
+    res.sendFile(path.join(__dirname,'./client/build/index.html'))
+})
 app.listen(PORT, (req, res)=>{
     console.log('Server started on port ', PORT)
-    mongoos.connect('mongodb+srv://car-app:car-app@fiverr.sitlk.mongodb.net/<fiverr>?retryWrites=true&w=majority',{useFindAndModify:false,useUnifiedTopology:true,useNewUrlParser:true},(err=>{
+    mongoos.connect('mongodb+srv://alamin:alamin@alamin.edsox.mongodb.net/alamin?retryWrites=true&w=majority',{useFindAndModify:false,useUnifiedTopology:true,useNewUrlParser:true},(err=>{
         if(err){
             console.log(err)
             return
