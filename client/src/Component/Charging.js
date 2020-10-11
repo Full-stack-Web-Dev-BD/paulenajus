@@ -8,9 +8,9 @@ import Typography from '@material-ui/core/Typography';
 import Navbar from './ProtectedComponent/Navbar'
 import PowerIcon from '@material-ui/icons/Power';
 import { Link } from 'react-router-dom';
-import { Input } from '@material-ui/core';
-import { set } from 'mongoose';
+import queryString from 'query-string'
 import './canim.css'
+import Axios from 'axios';
 
 const useStyles = makeStyles({
   root: {
@@ -31,14 +31,16 @@ const useStyles = makeStyles({
 });
 
 export default function Charging() {
+  const [status, setStatus] = useState('Charging ...')
+  const [isState, setIsState] = useState(false)
   const [btnString, setBtnString] = useState('Connect')
   const [chargerDigit, setChargerDigit] = useState('')
   const [error, setError] = useState(false)
   const classes = useStyles();
-  const [h, setH] = useState()
-  const [m, setM] = useState()
-  const [s, setS] = useState()
-  const bull = <span className={classes.bullet}>•</span>;
+  const [h, setH] = useState(0)
+  const [m, setM] = useState(0)
+  const [s, setS] = useState(0)
+  const [chargingState, setChargingState] = useState({})
   const connectCharger = () => {
     if (!chargerDigit) {
       return setError(true)
@@ -49,46 +51,75 @@ export default function Charging() {
     }, 2000);
   }
   useState(() => {
-    function currentTime() {
-      var date = new Date(); /* creating object of Date class */
-      var hour = date.getHours();
-      var min = date.getMinutes();
-      var sec = date.getSeconds();
-      var midday = "AM";
-      midday = (hour >= 12) ? "PM" : "AM"; /* assigning AM/PM */
-      hour = (hour == 0) ? 12 : ((hour > 12) ? (hour - 12) : hour); /* assigning hour in 12-hour format */
-      hour = updateTime(hour);
-      min = updateTime(min);
-      sec = updateTime(sec);
-      // document.getElementById("clock").innerText = hour + " : " + min + " : " + sec + " " + midday; /* adding time to the div */
-      setH(hour)
-      setM(min)
-      setS(sec)
-      var t = setTimeout(currentTime, 1000); /* setting timer */
+
+    function getTimeRemaining(endtime) {
+      let endT = Date.parse(endtime)
+      let currentT = Date.parse(new Date());
+      const total = endT - currentT
+      const seconds = Math.floor((total / 1000) % 60);
+      const minutes = Math.floor((total / 1000 / 60) % 60);
+      const hours = Math.floor((total / (1000 * 60 * 60)) % 24);
+      const days = Math.floor(total / (1000 * 60 * 60 * 24));
+      return {
+        total,
+        days,
+        hours,
+        minutes,
+        seconds
+      };
     }
 
-    function updateTime(k) { /* appending 0 before time elements if less than 10 */
-      if (k < 10) {
-        return "0" + k;
-      }
-      else {
-        return k;
+    function initializeClock(endtime) {
+      updateClock();
+      const timeinterval = setInterval(updateClock, 1000);
+
+      function updateClock() {
+        const t = getTimeRemaining(endtime);
+        setH(('0' + t.hours).slice(-2));
+        setM(('0' + t.minutes).slice(-2));
+        setS(('0' + t.seconds).slice(-2));
+        if (t.total <= 0) {
+          clearInterval(timeinterval);
+        }
       }
     }
-
-    currentTime();
+    let cid = queryString.parse(window.location.search).cid
+    Axios.get(`/findchargingstate/${cid}`)
+      .then(res => {
+        setChargingState(res.data.chargingState)
+        console.log(res.data);
+        if (res.data.chargingState) {
+          alert('e')
+          let ct = Date.parse(new Date());
+          let st = res.data.chargingState.completed
+          if (st < ct) {
+            alert('done')
+            setStatus('Charged !')
+            setIsState(true)
+          } else if (st > ct) {
+            console.log('remain');
+            initializeClock(res.data.chargingState.chargeEndTime)
+          }
+        }
+      })
+      .catch(err => {
+        console.log('try later', err)
+      })
   }, [])
   return (
     <div>
       <Navbar title=" Dashboard " />
-
       <div className="row mt-5">
         <div className="col-md-6 offset-md-3">
           <Card className={classes.root} variant="outlined" >
             <div className="charging_anim">
               <figure>
                 <div className="clock_text">
-                  <h2 style={{display:'flex'}}><span> {h} </span>:<span> {m} </span>:<span> {s} </span></h2>
+                  {
+                    isState ?
+                      <h2 style={{ display: 'flex' }}>Session Completed</h2> :
+                      <h2 style={{ display: 'flex' }}><span> {h} </span>:<span> {m} </span>:<span> {s} </span></h2>
+                  }
                 </div>
                 <div class="c"></div>
                 <div class="c2"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
@@ -99,15 +130,15 @@ export default function Charging() {
               </figure>
             </div>
             <Typography variant="h5" color="primary" component="h2">
-              <PowerIcon color="primery" />Charging ...
+              <PowerIcon color="primery" />{status}
             </Typography>
             <CardContent>
               <Typography className={classes.title} color="textSecondary" gutterBottom>
               </Typography>
             </CardContent>
             <CardActions>
-              <Link to='/cconnect'>
-                <Button size="small" variant="contained" color="secondary" onClick={() => { connectCharger() }} >Stop Charging  </Button>
+              <Link to='/'>
+                <Button size="small" variant="contained" color="secondary" onClick={() => { connectCharger() }} >Go Home  </Button>
               </Link>
             </CardActions>
           </Card>

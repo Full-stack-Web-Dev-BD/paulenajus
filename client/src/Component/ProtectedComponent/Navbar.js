@@ -129,7 +129,7 @@ export default function Navbar({ title }) {
       })
   }
   const changeHandler = (e) => {
-    if (!(window.location.pathname === '/viewalllocation' || (window.location.pathname === '/public'))) {
+    if (!(window.location.pathname === '/viewalllocation' || (window.location.pathname === '/public')  || (window.location.pathname === '/home'))) {
       window.location.href = '/viewalllocation'
     } else {
       setLocationName(e.target.value)
@@ -230,7 +230,7 @@ export default function Navbar({ title }) {
 
           </IconButton>
           <Typography className={classes.title} variant="h6" noWrap>
-            {iTitle?iTitle: title}
+            {iTitle ? iTitle : title}
           </Typography>
           <div className={classes.search}>
             <div className={classes.searchIcon}>

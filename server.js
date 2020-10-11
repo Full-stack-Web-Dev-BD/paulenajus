@@ -28,7 +28,7 @@ app.use(bodyParser.urlencoded({extended:true}))
 app.use(bodyParser.json())
 app.use(userRouter)
 app.use(require('./router/chargerRouter'))
-
+app.use(require('./router/chargingRouter'))
 
 
 

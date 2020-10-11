@@ -60,6 +60,7 @@ const login=(req,res)=>{
                 return res.status(400).json({massage:"Wrong password provided!!"})
             }
             let token=jwt.sign({
+                _id:user._id,
                 type:user.type,
                 name:user.name,
                 email:user.email,

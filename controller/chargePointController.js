@@ -122,23 +122,23 @@ const findChargePoint = (req, res) => {
 
 const findLocation = (req, res) => {
     let keyword = req.body.keyword
-    if(!keyword){
-        return res.status(400).json({status:false, message:"Keyword not founded "})
+    if (!keyword) {
+        return res.status(400).json({ status: false, message: "Keyword not founded " })
     }
     chargePointModel.find()
         .then(loc => {
-            let result=[]
-            loc.map(el=>{
-                let splited= el.chargeLocationtName.split(' ')
-                splited.map(sel=>{
-                    console.log(sel , keyword)
-                    if(sel.toLowerCase()===keyword.toLowerCase()){
+            let result = []
+            loc.map(el => {
+                let splited = el.chargeLocationtName.split(' ')
+                splited.map(sel => {
+                    console.log(sel, keyword)
+                    if (sel.toLowerCase() === keyword.toLowerCase()) {
                         console.log('true')
                         return result.push(el)
                     }
                 })
             })
-            return res.status(200).json({status:true, location:result})
+            return res.status(200).json({ status: true, location: result })
         })
 }
 module.exports = {

@@ -51,8 +51,6 @@ class App extends Component {
                     <ProtectedRoute path="/chartStatus" component={ChargingStatus} />
                     {/* <ProtectedRoute path="/create-schedule" component={CreateSchedule} /> */}
                     {/* <ProtectedRoute path="/send-email" component={Mail} /> */}
-
-
                     <PublicRoute path="/public" component={PublicPage} />
                     <PublicRoute  path='/posts' component={Posts}/>
                     <PublicRoute  path='/login' component={Login}/>
