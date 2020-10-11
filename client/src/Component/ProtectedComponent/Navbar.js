@@ -15,12 +15,11 @@ import AccountCircle from '@material-ui/icons/AccountCircle';
 import MailIcon from '@material-ui/icons/Mail';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import MoreIcon from '@material-ui/icons/MoreVert';
-import MenuListComposition from './Menu'
 import { Link } from 'react-router-dom';
 import { Button } from '@material-ui/core';
 import Axios from 'axios';
-import { useRecoilState } from 'recoil'
-import { searchLocationState } from '../../recoilState'
+import { useRecoilState, useRecoilValue } from 'recoil'
+import { searchLocationState, userState } from '../../recoilState'
 
 const useStyles = makeStyles((theme) => ({
 
@@ -105,9 +104,10 @@ export default function Navbar({ title }) {
   const [error, setError] = useState(false)
   const [getSearchLocationState, setSearchLocationState] = useRecoilState(searchLocationState)
   const [iTitle, setITitle] = useState('')
+  const getUserInfo = useRecoilValue(userState)
   useEffect(() => {
 
-    if (!(window.location.pathname === '/viewalllocation' || (window.location.pathname === '/public'))) {
+    if ((window.location.pathname === '/viewalllocation' || (window.location.pathname === '/public')) ) {
       setIsShowButton(true)
     } else {
       setIsShowButton(false)
@@ -129,7 +129,7 @@ export default function Navbar({ title }) {
       })
   }
   const changeHandler = (e) => {
-    if (!(window.location.pathname === '/viewalllocation' || (window.location.pathname === '/public')  || (window.location.pathname === '/home'))) {
+    if (!(window.location.pathname === '/viewalllocation' || (window.location.pathname === '/public') )) {
       window.location.href = '/viewalllocation'
     } else {
       setLocationName(e.target.value)
@@ -155,7 +155,7 @@ export default function Navbar({ title }) {
   };
   const logout = () => {
     window.localStorage.removeItem('car-app')
-    window.location.href = '/login'
+    window.location.href = '/public'
   }
   const menuId = 'primary-search-account-menu';
   const renderMenu = (
@@ -257,7 +257,7 @@ export default function Navbar({ title }) {
                 <IconButton aria-label="show 4 new mails" color="inherit">
                   <Badge color="secondary">
                     <h4>
-                      {'Alamin Hossen'}
+                      {getUserInfo.email}
                     </h4>
                   </Badge>
                 </IconButton>
@@ -270,15 +270,22 @@ export default function Navbar({ title }) {
                     </Link>
                   </Badge>
                 </IconButton>
-                <IconButton
-                  edge="end"
-                  aria-label="account of current user"
-                  aria-controls={menuId}
-                  aria-haspopup="true"
-                  onClick={handleProfileMenuOpen}
-                  color="inherit"
-                >
-                  <AccountCircle />
+                {
+                  getUserInfo.type === 'user' ?
+                    <IconButton aria-label="show 17 new notifications" color="inherit">
+                      <Badge color="primary">
+                        <Link to={`/chistory/?uid=${getUserInfo._id}`} >
+                          <Button variant="contained" color="primary">My History</Button>
+                        </Link>
+                      </Badge>
+                    </IconButton> : ''
+                }
+                <IconButton aria-label="show 17 new notifications" color="inherit">
+                  <Badge color="primary">
+                    <Button onClick={() => { logout() }} variant="contained" size="small" color="secondary">
+                      Logout
+                    </Button>
+                  </Badge>
                 </IconButton>
               </div> :
               <div className={classes.sectionDesktop}>

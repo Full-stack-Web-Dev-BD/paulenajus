@@ -3,6 +3,7 @@ import Axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import Navbar from './Navbar'
 import queryString from 'query-string'
+import AttachMoneyIcon from '@material-ui/icons/AttachMoney';
 const AddChargePoint = () => {
   const [status, setStatus] = useState('')
   const [cpname, setCpname] = useState()
@@ -52,15 +53,15 @@ const AddChargePoint = () => {
                     <Input error={error.cpname?true:false} onChange={e=>setCpname(e.target.value)} placeholder="Charge Point Name" />
                   </FormGroup>
                   <FormGroup  className="mb-4">
-                    <FormLabel>Indicate KW</FormLabel>
-                    <Input error={error.kw?true:false} onChange={e=>setKw(e.target.value)} placeholder="Indicate Charger KW" />
+                    <FormLabel>Charging Speed KW (Per Hour)</FormLabel>
+                    <Input error={error.kw?true:false} onChange={e=>setKw(e.target.value)} placeholder="Indicate Charging Speed in KW" />
                   </FormGroup>
                   <FormGroup  className="mb-4">
-                    <FormLabel>Type of Charger</FormLabel>
+                    <FormLabel>Connector Type</FormLabel>
                     <Input error={error.type?true:false} onChange={e=>setType(e.target.value)} placeholder="Type of Charger" />
                   </FormGroup>
                   <FormGroup  className="mb-4">
-                    <FormLabel>Cost  of Charger</FormLabel>
+                    <FormLabel><AttachMoneyIcon/> Cost  of Charger (Per Hour) </FormLabel>
                     <Input type="number" error={error.cost?true:false} onChange={e=>setCost(e.target.value)} placeholder="Cost of Charger" />
                   </FormGroup>
                   <FormGroup >

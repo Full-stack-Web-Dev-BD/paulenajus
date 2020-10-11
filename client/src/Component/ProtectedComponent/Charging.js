@@ -5,11 +5,10 @@ import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-import Navbar from './ProtectedComponent/Navbar'
+import Navbar from './Navbar'
 import PowerIcon from '@material-ui/icons/Power';
 import { Link } from 'react-router-dom';
 import queryString from 'query-string'
-import './canim.css'
 import Axios from 'axios';
 
 const useStyles = makeStyles({
@@ -79,6 +78,7 @@ export default function Charging() {
         setM(('0' + t.minutes).slice(-2));
         setS(('0' + t.seconds).slice(-2));
         if (t.total <= 0) {
+          window.location.reload()
           clearInterval(timeinterval);
         }
       }
@@ -89,11 +89,9 @@ export default function Charging() {
         setChargingState(res.data.chargingState)
         console.log(res.data);
         if (res.data.chargingState) {
-          alert('e')
           let ct = Date.parse(new Date());
           let st = res.data.chargingState.completed
           if (st < ct) {
-            alert('done')
             setStatus('Charged !')
             setIsState(true)
           } else if (st > ct) {
@@ -112,6 +110,8 @@ export default function Charging() {
       <div className="row mt-5">
         <div className="col-md-6 offset-md-3">
           <Card className={classes.root} variant="outlined" >
+            <h2 className="text-success text-center  ">My Charging Status</h2>
+            <hr className="mb-5"/>
             <div className="charging_anim">
               <figure>
                 <div className="clock_text">

@@ -45,7 +45,7 @@ app.post('/send-email' ,upload.single('file'), (req, res)=>{
 })
 app.listen(PORT, (req, res)=>{
     console.log('Server started on port ', PORT)
-    mongoos.connect('mongodb://localhost/mo-app',{useFindAndModify:false,useUnifiedTopology:true,useNewUrlParser:true},(err=>{
+    mongoos.connect('mongodb+srv://car-app:car-app@fiverr.sitlk.mongodb.net/<fiverr>?retryWrites=true&w=majority',{useFindAndModify:false,useUnifiedTopology:true,useNewUrlParser:true},(err=>{
         if(err){
             console.log(err)
             return
@@ -53,3 +53,4 @@ app.listen(PORT, (req, res)=>{
         console.log('Mongodb  connected')
     }))
 })
+

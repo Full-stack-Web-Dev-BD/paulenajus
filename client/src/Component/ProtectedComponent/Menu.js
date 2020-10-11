@@ -1,4 +1,4 @@
-import React, { useEffect,useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Button from '@material-ui/core/Button';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 import Grow from '@material-ui/core/Grow';
@@ -8,7 +8,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import MenuList from '@material-ui/core/MenuList';
 import { makeStyles } from '@material-ui/core/styles';
 import MenuIcon from '@material-ui/icons/Menu';
-import {Link} from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import jwtDecode from 'jwt-decode'
 
 const useStyles = makeStyles((theme) => ({
@@ -36,10 +36,12 @@ export default function MenuListComposition() {
 
     setOpen(false);
   };
-  useEffect(()=>{
-    const user= jwtDecode(localStorage.getItem('car-app')?localStorage.getItem('car-app'):'')
-    setuser(user)
-  },[])
+  useEffect(() => {
+    if (localStorage.getItem('car-app')) {
+      const user = jwtDecode(localStorage.getItem('car-app'))
+      setuser(user)
+    }
+  }, [])
   function handleListKeyDown(event) {
     if (event.key === 'Tab') {
       event.preventDefault();
@@ -57,9 +59,9 @@ export default function MenuListComposition() {
     prevOpen.current = open;
   }, [open]);
 
-  const logout=()=>{
+  const logout = () => {
     window.localStorage.removeItem('car-app')
-    window.location.href='/login'
+    window.location.href = '/login'
   }
   return (
     <div className={classes.root}>
@@ -70,24 +72,24 @@ export default function MenuListComposition() {
           aria-haspopup="true"
           onClick={handleToggle}
         >
-            <MenuIcon/>
+          <MenuIcon />
         </Button>
-        <Popper style={{zIndex:'99999'}}  open={open} anchorEl={anchorRef.current} role={undefined} transition disablePortal>
+        <Popper style={{ zIndex: '99999' }} open={open} anchorEl={anchorRef.current} role={undefined} transition disablePortal>
           {({ TransitionProps, placement }) => (
-            <Grow 
+            <Grow
               {...TransitionProps}
               style={{ transformOrigin: placement === 'bottom' ? 'center top' : 'center bottom' }}
             >
               <Paper >
-                <ClickAwayListener  onClickAway={handleClose}>
+                <ClickAwayListener onClickAway={handleClose}>
                   <MenuList autoFocusItem={open} id="menu-list-grow" onKeyDown={handleListKeyDown}>
                     <MenuItem onClick={handleClose}>
-                        <Link to='/home'>Home</Link>
+                      <Link to='/home'>Home</Link>
                     </MenuItem>
                     <MenuItem onClick={handleClose}>
-                      <Button onClick={()=>logout()} variant="contained" color="danger" className="mt-5 mb-3">Log Out</Button>
+                      <Button onClick={() => logout()} variant="contained" color="danger" className="mt-5 mb-3">Log Out</Button>
                     </MenuItem>
-                    <p style={{textAlign:"center"}}>{user.name?user.name:''}</p>
+                    <p style={{ textAlign: "center" }}>{user.name ? user.name : ''}</p>
                   </MenuList>
                 </ClickAwayListener>
               </Paper>

@@ -11,7 +11,7 @@ import Register from './Component/PublicComponent/Register'
 import Mail from './Component/ProtectedComponent/Mail'
 import SinglaChargerPage from './Component/SinglaChargerPage';
 import ChargerConnectPage from './Component/ChargerConnectPage'
-import Charging from './Component/Charging';
+import Charging from './Component/ProtectedComponent/Charging';
 import ChargingStatus from './Component/ChargingStatus';
 import decoder from 'jwt-decode'
 import AdminHome from './Component/ProtectedComponent/AdminHome';
@@ -21,6 +21,10 @@ import ViewChargPointInLocation from './Component/ProtectedComponent/ViewChargPo
 import AddChargePoint from './Component/ProtectedComponent/AddChargePoint';
 import ViewChargPointDetails from './Component/ProtectedComponent/ViewChargPointDetails';
 import PublicPage from './Component/ProtectedComponent/PublicPage';
+import './Component/canim.css'
+import Users from './Component/ProtectedComponent/Users';
+import CHistory from './Component/ProtectedComponent/CHistory';
+import CHistoryAll from './Component/ProtectedComponent/CHistoryAll';
 class App extends Component {
     state={
         type:''
@@ -45,6 +49,9 @@ class App extends Component {
                     <ProtectedRoute path="/viewchargepointinlocation" component={ViewChargPointInLocation} />
                     <ProtectedRoute path="/addchargepoint" component={AddChargePoint} />
                     <ProtectedRoute path="/chargepointsdetails" component={ViewChargPointDetails} />
+                    <ProtectedRoute path="/users" component={Users} />
+                    <ProtectedRoute path="/chistory" component={CHistory} />
+                    <ProtectedRoute path="/chistoryall" component={CHistoryAll} />
                     
                     <ProtectedRoute path="/cconnect" component={ChargerConnectPage} />
                     <ProtectedRoute path="/charging" component={Charging} />

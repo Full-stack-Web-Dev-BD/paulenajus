@@ -8,7 +8,7 @@ const Users = () => {
     .then(res=>{
       setUsers(res.data.users)
     })
-  })
+  },[])
   return (
     <div className="container">
       <div className="row">

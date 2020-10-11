@@ -1,5 +1,6 @@
 const { update } = require('../model/ChargingModel');
-const chargingModel = require('../model/ChargingModel')
+const chargingModel = require('../model/ChargingModel');
+const chargingRouter = require('../router/chargingRouter');
 
 
 module.exports = {
@@ -25,5 +26,39 @@ module.exports = {
                 console.log(err)
                 return res.status(500).json({ message: "Server error" })
             })
+    },
+    findchargingHistory(req,res){
+        chargingModel.find({uid:req.params.id})
+        .then(cHistory=>{
+            return res.status(200).json({status:true, history:cHistory})
+        })
+        .catch(err=>{
+            return res.status(500).json({status:false,message:"Server error"})
+        })
+    },
+    
+    findchargingHistoryall(req,res){
+        chargingModel.find()
+        .then(cHistory=>{
+            return res.status(200).json({status:true, history:cHistory})
+        })
+        .catch(err=>{
+            return res.status(500).json({status:false,message:"Server error"})
+        })
+    },
+    togglePayment(req,res){
+        chargingModel.findOne({_id:req.params.id})
+        .then(ch=>{
+            ch.paid=!ch.paid
+            ch.save().then(updated=>{
+                return res.status(200).json({message:"Updated"})
+            })
+            .catch(err=>{
+                return res.status(500).json({message:"Server error occurd "})
+            })
+        })
+        .catch(err=>{
+            return res.status(500).json({message:"Server error occurd "})
+        })
     }
 }

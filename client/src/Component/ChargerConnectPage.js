@@ -12,9 +12,9 @@ import IndeterminateCheckBoxOutlinedIcon from '@material-ui/icons/IndeterminateC
 import Alert from '@material-ui/lab/Alert';
 import queryString from 'query-string'
 import Axios from 'axios';
-import { useRecoilValue } from 'recoil'
-import { userState } from '../recoilState'
 import decoder from 'jwt-decode'
+import { useRecoilState, useRecoilValue } from 'recoil'
+import { searchLocationState, userState } from '../recoilState'
 const useStyles = makeStyles({
   root: {
     minWidth: 275,
@@ -41,7 +41,7 @@ export default function ChargerConnectPage() {
   const classes = useStyles();
   const [chargerInformation, setChargerInformation] = useState({})
   const [qs, setQs] = useState({})
-  const userInfo = useRecoilValue(userState)
+  const getUserState = useRecoilValue(userState)
 
   useEffect(() => {
     let obj = {
@@ -58,6 +58,10 @@ export default function ChargerConnectPage() {
       })
   }, [])
   const connectCharger = () => {
+    if(getUserState.type==='admin'){
+     alert('Admin Did Not Have access To Connect Charger !')
+      return window.location.href='/'
+    }
     const token = window.localStorage.getItem('car-app')
     if (token) {
       let decoded = decoder(token)

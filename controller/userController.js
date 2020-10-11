@@ -86,7 +86,7 @@ const getSingleUser=(req,res)=>{
 const getAllUser=(req,res)=>{
     userModel.find()
     .then(users=>{
-        res.status(200).json(users)
+        res.status(200).json({users:users})
     })
     .catch(err=>{
         console.log(err)

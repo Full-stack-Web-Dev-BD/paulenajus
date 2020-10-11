@@ -11,8 +11,8 @@ import { Link } from 'react-router-dom';
 import ChargerCard from '../ChargerCard'
 import { Alert, AlertTitle } from '@material-ui/lab';
 import { CardHeader } from '@material-ui/core';
-import {useRecoilState} from 'recoil'
-import {userState} from '../../recoilState'
+import { useRecoilState } from 'recoil'
+import { userState } from '../../recoilState'
 import jwtDecoder from 'jwt-decode'
 const useStyles = makeStyles({
   root: {
@@ -33,17 +33,17 @@ const useStyles = makeStyles({
 });
 
 export default function AdminHome() {
-  const [schedule, setschedule] = useState([])
   const classes = useStyles();
-  const bull = <span className={classes.bullet}>•</span>;
   const [isShowAlert, setIsShowAlert] = useState(false)
   const [alertText, setAlertText] = useState('')
   const [user, setUser] = useRecoilState(userState)
 
   useEffect(() => {
-    let decoded =jwtDecoder(window.localStorage.getItem('car-app'))
-    setUser(decoded)
-  },[])
+    if (window.localStorage.getItem('car-app')) {
+      let decoded = jwtDecoder(window.localStorage.getItem('car-app'))
+      setUser(decoded)
+    }
+  }, [])
 
 
   return (
@@ -65,41 +65,43 @@ export default function AdminHome() {
               <div className="col-md-6">
                 <Card>
                   <CardContent>
-                      <h3 className=" text-secondary">Manage Users (Client)</h3>
-                      <p className="text-secondary">(View and manage  all client )</p>
-                      <Link to='/users'>View List </Link>
+                    <h3 className=" text-secondary">Manage Users (Client)</h3>
+                    <p className="text-secondary">(View and manage  all client )</p>
+                    <Link to='/users'>View List </Link>
                   </CardContent>
                 </Card>
               </div>
               <div className="col-md-6">
                 <Card>
                   <CardContent>
-                      <h3 className=" text-secondary">View Charge History (all)</h3>
-                      <p className="text-secondary">(Check history of all client )</p>
-                      <Link to='/users'>Go To table </Link>
+                    <h3 className=" text-secondary">View Charge History (all)</h3>
+                    <p className="text-secondary">(Check history of all client )</p>
+                    <Link to='/chistoryall'>Go To table </Link>
                   </CardContent>
                 </Card>
               </div>
             </div>
-            
+
             <div className="row mt-5">
               <div className="col-md-6">
                 <Card>
                   <CardContent>
-                      <h3 className=" text-secondary">Manage Location</h3>
-                      <p className="text-secondary">(Add , Edit , Delete location and charger point )</p>
-                      <Link to='/addlocation'>Add a  location </Link>
+                    <h3 className=" text-secondary">Manage Location</h3>
+                    <p className="text-secondary">(Add , Edit , Delete location and charger point )</p>
+                    <Link to='/addlocation'>Add a  location </Link>
                   </CardContent>
                 </Card>
               </div>
-              {/* <div className="col-md-6">
+              <div className="col-md-6">
                 <Card>
                   <CardContent>
-                      <h3 className=" text-secondary">View Charge History (all)</h3>
-                      <Link to='/users'>Go To table </Link>
+                      <h3 className=" text-secondary">View Location</h3>
+                      <p className="text-secondary">(Manage all about  location and charger point )</p>
+
+                      <Link to='/viewalllocation'>Go to Location Page </Link>
                   </CardContent>
                 </Card>
-              </div> */}
+              </div>
             </div>
           </div>
         </div>
