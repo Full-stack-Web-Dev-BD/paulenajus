@@ -51,13 +51,13 @@ app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, './client/build/index.html'));
 });
 
-app.use(express.static(path.join(__dirname,'./client/build')))
-app.get('*',(req,res)=>{
-    res.sendFile(path.join(__dirname,'./client/build/index.html'))
-})
+// app.use(express.static(path.join(__dirname,'./client/build')))
+// app.get('*',(req,res)=>{
+//     res.sendFile(path.join(__dirname,'./client/build/index.html'))
+// })
 app.listen(PORT, (req, res)=>{
     console.log('Server started on port ', PORT)
-    mongoos.connect('mongodb+srv://alamin:alamin@alamin.edsox.mongodb.net/alamin?retryWrites=true&w=majority',{useFindAndModify:false,useUnifiedTopology:true,useNewUrlParser:true},(err=>{
+    mongoos.connect('mongodb://localhost/mo-app',{useFindAndModify:false,useUnifiedTopology:true,useNewUrlParser:true},(err=>{
         if(err){
             console.log(err)
             return
@@ -66,3 +66,4 @@ app.listen(PORT, (req, res)=>{
     }))
 })
 
+// mongodb+srv://alamin:alamin@alamin.edsox.mongodb.net/alamin?retryWrites=true&w=majority

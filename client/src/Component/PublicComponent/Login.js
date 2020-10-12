@@ -64,7 +64,7 @@ const Login = () => {
                             </div>
                         </form>
                             <Button onClick={onSubmit} variant="contained" color="secondary" className="mt-5 mb-3">Login</Button>
-                            <p>Not registered yet ? Go to <Link to='/register'>Register Page</Link> </p>
+                            <p>Not registered yet ? Go to <Link to='/register'>Signup Page</Link> </p>
 
                     </CardContent>
                 </Card>
